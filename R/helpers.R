@@ -81,7 +81,7 @@ calculateOddsValues <- function(variant_info, config_values)
     variant_info$ub_95ci <- oddsInfo$UB
   }
 
-  print(variant_info)
+  #print(variant_info)
   return (variant_info)
 }
 
