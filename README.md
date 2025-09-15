@@ -54,7 +54,7 @@ variant_info$single_recurrent <- 108
 variant_info$single_non_recurrent <- 19
 variant_info$multi_somatic <- 4
 
-#Load config and modify if required
+#Modify config_values if you want to change the default settings and configurations
 print(config_values)
 
 result <- ddx41::curateVariant(variant_info, gnomad4, tommo_kova, bulk_curations, config_values)
@@ -71,7 +71,10 @@ result$rule_curations
 
 ### Example input dataset
 We have also provided a dataset containing values required as input for some variants.
-
+```r
+variant_info_file <- system.file("extdata", "VariantInfo.csv", package = "ddx41")
+data <- read.csv(variant_info_file, stringsAsFactors = F)
+```
 
 ## Online Curation Tool
 Check our online DDX41 curation tool at https://blombery-lab.shinyapps.io/ddx41/ if you are interested, which offers single and bulk modes for DDX41 variant curations.
