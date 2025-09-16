@@ -7,12 +7,14 @@ BP2 curation
 Homozygosity in an unaffected individual
 Not used when PP4 strong}
 \usage{
-evaluateBP2(variant_info, curation)
+evaluateBP2(variant_info, curation, config_values)
 }
 \arguments{
 \item{variant_info}{named list with all the information required for curation}
 
 \item{curation}{named list with curation results}
+
+\item{config_values}{configurations}
 }
 \value{
 named list with curations

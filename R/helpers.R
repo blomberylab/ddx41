@@ -315,7 +315,6 @@ runCurations <- function(variant_info, config_values) {
   curation <- evaluatePVS1(variant_info, curation, config_values)
   curation <- evaluatePS4(variant_info, curation, config_values)
   curation <- evaluatePM2(variant_info, curation, config_values)
-  curation <- evaluatePM4(variant_info, curation, config_values)
   curation <- evaluatePM5(variant_info, curation, config_values)
   curation <- evaluatePP1(variant_info, curation, config_values)
   curation <- evaluatePP3(variant_info, curation, config_values)
@@ -323,7 +322,7 @@ runCurations <- function(variant_info, config_values) {
   curation <- evaluatePS1(variant_info, curation)
   curation <- evaluateBA1(variant_info, curation, config_values)
   curation <- evaluateBS1(variant_info, curation, config_values)
-  curation <- evaluateBP2(variant_info, curation)
+  curation <- evaluateBP2(variant_info, curation, config_values)
   curation <- evaluateBP4(variant_info, curation, config_values)
   curation <- evaluateBP7(variant_info, curation, config_values)
 
@@ -574,33 +573,6 @@ evaluatePM2 <- function(variant_info, curation, config_values) {
   return(curation)
 }
 
-#' evaluatePM4 function
-#' PM4 curation
-#' Protein length changes due to in-frame deletions/ insertion in a non-repeat region or
-#'   stop loss variants
-#' @param variant_info named list with all the information required for curation
-#' @param curation named list with curation results
-#' @param config_values configurations
-#'
-#' @return named list with curations
-evaluatePM4 <- function(variant_info, curation, config_values) {
-
-  if (grepl("stop[_]lost", variant_info$consequence_VEP) && !grepl("frameshift", variant_info$consequence_VEP))
-  {
-    if (variant_info$hgvsc %in% config_values$PM4_exception_Variants)
-    {
-      curation[["PM4"]] <- "NotApplicable"
-    } else {
-      curation[["PM4"]] <- "Moderate"
-    }
-  }
-  else
-  {
-    curation[["PM4"]] <- "NotApplicable"
-  }
-
-  return(curation)
-}
 
 #' evaluatePM5 function
 #' PM5 curation
@@ -840,12 +812,19 @@ evaluateBS1 <- function(variant_info, curation, config_values) {
 #' Not used when PP4 strong
 #' @param variant_info named list with all the information required for curation
 #' @param curation named list with curation results
+#' @param config_values configurations
 #'
 #' @return named list with curations
-evaluateBP2 <- function(variant_info, curation) {
+evaluateBP2 <- function(variant_info, curation, config_values) {
 
-  eval_PP4 <- curation[["PP4"]]
-  if (eval_PP4 == "Strong")
+  #Find whether the variant has been found with PP4 strong variants
+  for (var in config_values$PP4_Strong_Variants)
+  {
+    strong_index <- c(strong_index, which(grepl(var, variant_info$literature_somatic$HGVSp_somatic, fixed = T)))
+  }
+  var_strong <- variant_info$literature_somatic[strong_index, ]
+
+  if (nrow(var_strong) != 0)
   {
     curation[["BP2"]] <- "NotApplicable"
   }
