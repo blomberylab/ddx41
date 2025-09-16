@@ -823,8 +823,8 @@ evaluateBP2 <- function(variant_info, curation, config_values) {
   {
     strong_index <- c(strong_index, which(grepl(var, variant_info$literature_somatic, fixed = T)))
   }
-  print(strong_index)
-  print(variant_info$literature_somatic)
+  #print(strong_index)
+  #print(variant_info$literature_somatic)
   var_strong <- variant_info$literature_somatic[strong_index]
 
   if (length(var_strong) != 0)
