@@ -823,9 +823,11 @@ evaluateBP2 <- function(variant_info, curation, config_values) {
   {
     strong_index <- c(strong_index, which(grepl(var, variant_info$literature_somatic, fixed = T)))
   }
-  var_strong <- variant_info$literature_somatic[strong_index, ]
+  print(strong_index)
+  print(variant_info$literature_somatic)
+  var_strong <- variant_info$literature_somatic[strong_index]
 
-  if (nrow(var_strong) != 0)
+  if (length(var_strong) != 0)
   {
     curation[["BP2"]] <- "NotApplicable"
   }
