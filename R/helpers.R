@@ -1558,7 +1558,7 @@ assignConsequence <- function(consequence)
 #' @param pr_A posterior probability of germline variant being pathogenic/deleterious
 #'
 #' @return calculated posterior probability
-calculate_updated_Pr_multi <- function(n, k, l, m, p=c(0.58, 0.10, 0.007), q=c(0.002, 0.002, 0.0015), pr_A=0.1) {
+calculate_updated_Pr_multi <- function(n, k, l, m, p=c(0.58, 0.10, 0.007), q=c(0.0023, 0.0020, 0.0014), pr_A=0.1) {
   log_message <- paste0("n:", n, " k: ", k, " l: ", l, " m: ", m)
   #cat(paste0("Odds of Pathogenicity parameters ", log_message, "\n"))
   # Create all valid combinations of supplied indices
