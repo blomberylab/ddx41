@@ -680,10 +680,10 @@ evaluatePP3 <- function(variant_info, curation, config_values) {
     }
     else #use AlphaMissense
     {
-      if (((!is.na(variant_info$alphamissense_class)) && (variant_info$alphamissense_class == "likely_pathogenic")) &&
+      if (((!is.na(variant_info$alphamissense_score)) && (variant_info$alphamissense_score >= config_values$PP3_AlphaMissense)) &&
           ((!is.na(spliceAI_delta_score)) && (spliceAI_delta_score >= config_values$PP3_SpliceAI))) {
         curation[["PP3"]] <- "Supporting"
-      } else if ((!is.na(variant_info$alphamissense_class)) && (variant_info$alphamissense_class == "likely_pathogenic")) {
+      } else if ((!is.na(variant_info$alphamissense_score)) && (variant_info$alphamissense_score >= config_values$PP3_AlphaMissense)) {
         curation[["PP3"]] <- "Supporting"
       } else if ((!is.na(spliceAI_delta_score)) && (spliceAI_delta_score >= config_values$PP3_SpliceAI)) {
         curation[["PP3"]] <- "Supporting"
@@ -876,10 +876,10 @@ evaluateBP4 <- function(variant_info, curation, config_values) {
     }
     else #use AlphaMissense
     {
-      if (((!is.na(variant_info$alphamissense_class)) && (variant_info$alphamissense_class == "likely_benign")) &&
+      if (((!is.na(variant_info$alphamissense_score)) && (variant_info$alphamissense_score <= config_values$BP4_AlphaMissense)) &&
           (!is.na(spliceAI_delta_score)) && (spliceAI_delta_score <= config_values$BP4_SpliceAI)) {
         curation[["BP4"]] <- "Supporting"
-      } else if ((!is.na(variant_info$alphamissense_class)) && (variant_info$alphamissense_class == "likely_benign")) {
+      } else if ((!is.na(variant_info$alphamissense_score)) && (variant_info$alphamissense_score <= config_values$BP4_AlphaMissense)) {
         curation[["BP4"]] <- "NotMet"
       } else if ((!is.na(spliceAI_delta_score)) && (spliceAI_delta_score <= config_values$BP4_SpliceAI)) {
         curation[["BP4"]] <- "NotMet"

@@ -16,6 +16,8 @@ A named list with following items
   \item{PP4_method}{}
   \item{PP3_REVEL}{}
   \item{BP4_REVEL}{}
+  \item{PP3_AlphaMissense}{}
+  \item{BP4_AlphaMissense}{}
   \item{PP3_SpliceAI}{}
   \item{BP4_SpliceAI}{}
   \item{BP7_SpliceAI}{}
